@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<div id="dataApp">
+  <!--过滤器，| 后面定义的是过滤器的名字-->
+  {{ date }} <br>
+  {{ date | formatDate }} <br>
+  <!--过滤器的串联-->
+  <!--{{ date | filter1 | filter2 }} <br>-->
+  <!--过滤器的参数-->
+  {{ date | formatDate('天气', '晴')}} <br>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.7/dist/vue.js"></script>
+<script>
+  // 需求：在页面中实时显示当前时间
+  // 在月份、日期、小时<10的时候补0
+  var plusDate = function (value) {
+    return value < 10 ? '0' + value : value
+  }
+
+  var app = new Vue({
+    el: '#dataApp',
+    data: {
+      date: new Date()
+    },
+    // 定义过滤器
+    filters: {
+      // 这里的value就是需要过滤的数据，即上面的date
+      formatDate: function (value, a, b) {
+        // 将字符串转换为date类型
+        var date = new Date(value)
+        var year = date.getFullYear()
+        var month = plusDate(date.getMonth() + 1)
+        var day = plusDate(date.getDay())
+        var hours = plusDate(date.getHours())
+        var min = plusDate(date.getMinutes())
+        var sec = plusDate(date.getSeconds())
+        // 将整理好的数据返回
+        return `现在是${year}年${month}月${day}日--${hours}点${min}分${sec}秒+参数：${a}+${b}`
+      }
+    },
+    mounted: function () {
+      // this 就代表vue实例
+      // var _this = this  下面就是 _this.data = new Date()
+      // 定时器
+      this.timer = setInterval(function () {
+        app.data = new Date()
+      }, 1000)
+    },
+    beforeDestroy: function () {
+      // 如果定时器存在，清除定时器
+      if (this.timer) {
+        clearInterval(this.timer)
+      }
+    }
+  })
+</script>
+</body>
+</html>
