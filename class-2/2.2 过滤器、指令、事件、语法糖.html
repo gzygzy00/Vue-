@@ -6,6 +6,11 @@
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <style>
+    .transRed {
+      background-color: red;
+    }
+  </style>
 </head>
 <body>
 <div id="dataApp">
@@ -16,6 +21,27 @@
   <!--{{ date | filter1 | filter2 }} <br>-->
   <!--过滤器的参数-->
   {{ date | formatDate('天气', '晴')}} <br>
+  <hr>
+  <!--指令和事件-->
+  v-text指令：和 {{}} 功能完全一样，解析文本<br>
+  {{ apple }} <br>
+  <span v-text='apple'></span> <br>
+  <hr>
+  v-html指令：解析html <br>
+  {{ banana }} <br>
+  <span v-html="banana" style="background-color: black;"></span> <br>
+  <hr>
+  v-bind指令：绑定活的属性 <br>
+  <div v-bind:class="className">bind</div>
+  <div :class="className">bind</div>
+
+  <hr>
+  v-on指令：绑定事件监听器 <br>
+  <!--为按钮添加监听指令-->
+  <button v-on:click="count">{{ countnum }}</button>
+  <button @click="count">{{ countnum }}</button>
+
+
 </div>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.7/dist/vue.js"></script>
 <script>
@@ -28,7 +54,24 @@
   var app = new Vue({
     el: '#dataApp',
     data: {
-      date: new Date()
+      date: new Date(),
+      apple: '🍎',
+      banana: '<span style="color: yellow;">香蕉</span>',
+      className: 'transRed',
+      countnum: 0
+    },
+    methods: {
+      count: function () {
+        this.countnum += 1
+      }
+    },
+    mounted: function () {
+      // this 就代表vue实例
+      // var _this = this  下面就是 _this.data = new Date()
+      // 定时器
+      this.timer = setInterval(function () {
+        app.date = new Date()
+      }, 1000)
     },
     // 定义过滤器
     filters: {
@@ -45,14 +88,6 @@
         // 将整理好的数据返回
         return `现在是${year}年${month}月${day}日--${hours}点${min}分${sec}秒+参数：${a}+${b}`
       }
-    },
-    mounted: function () {
-      // this 就代表vue实例
-      // var _this = this  下面就是 _this.data = new Date()
-      // 定时器
-      this.timer = setInterval(function () {
-        app.data = new Date()
-      }, 1000)
     },
     beforeDestroy: function () {
       // 如果定时器存在，清除定时器
