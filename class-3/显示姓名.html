@@ -6,13 +6,16 @@
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.7/dist/vue.js"></script>
 </head>
 <body>
-<div id="app">
+<div id="app1">
+  姓名：{{ fullName }}
+</div>
+<div id="app2">
   姓名：{{ fullName }}
 </div>
 </body>
 <script>
-  var app = new Vue({
-    el: '#app',
+  var app1 = new Vue({
+    el: '#app1',
     data: {
       firstName: 'Bei',
       lastName: 'Liu'
@@ -33,6 +36,23 @@
           this.lastName = names[0]
           console.log('已调用set')
         }
+      }
+    }
+  })
+
+  var app2 = new Vue({
+    el: '#app2',
+    data: {
+      firstName: 'Yu',
+      lastName: 'Guan',
+      fullName: 'Guan Yu'
+    },
+    watch: {
+      firstName: function (newVal, OldVal) {
+        this.fullName = this.lastName + ' ' + newVal
+      },
+      lastName(newVal, OldVal) {
+        this.fullName = newVal + ' ' + this.firstName
       }
     }
   })
