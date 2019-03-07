@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.7/dist/vue.js"></script>
+  <style>
+    .bgColor {
+      background-color: deepskyblue;
+      height: 200px;
+      width: 200px;
+    }
+
+    .divBorder {
+      border: 10px solid coral;
+    }
+
+    .active {
+      background-color: aquamarine;
+      height: 100px;
+      width: 100px;
+    }
+
+    #app2 .bgc1 {
+      background-color: deepskyblue;
+    }
+
+    #app2 .bgc2 {
+      background-color: coral;
+    }
+
+
+  </style>
+</head>
+<body>
+绑定class对象语法：对象「 键——类名；值——布尔值 」 <br>
+<div id="app1">
+  <div :class="{bgColor: isActive, divBorder: hasBorder}"></div>
+  <hr>
+  <div :class="classnames"></div>
+</div>
+<hr>
+<div id="app2">
+  <input type="button" value="点击改变颜色" :class="{bgc1: isChangeBlue, bgc2: isChangeRed}" @click="changeColor">
+</div>
+</body>
+<script>
+  var app1 = new Vue({
+    el: '#app1',
+    data: {
+      isActive: true,
+      hasBorder: false
+    },
+    computed: {
+      classnames() {
+        return {
+          active: this.isActive && !this.hasBorder
+        }
+      }
+    }
+  });
+  // 需求：点击一个按钮，来回切换背景颜色为红、蓝
+  var app2 = new Vue({
+    el: '#app2',
+    data: {
+      isChangeBlue: true,
+      isChangeRed: false
+    },
+    methods: {
+      changeColor() {
+        if (this.isChangeBlue) {
+          this.isChangeRed = !this.isChangeRed
+        }
+      }
+    }
+  })
+</script>
+</html>

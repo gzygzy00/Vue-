@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.7/dist/vue.js"></script>
+  <style>
+    img {
+      height: 200px;
+      width: 200px;
+    }
+  </style>
+</head>
+<body>
+v-bind的作用是：绑定活的属性 <br>
+<div id="app">
+  <a v-bind:href="url">目标网址</a>
+  <img :src="imgUrl" alt="">
+</div>
+</body>
+<script>
+  var app = new Vue({
+    el: '#app',
+    data: {
+      url: 'https://www.bilibili.com/',
+      imgUrl: 'https://i0.hdslb.com/bfs/article/a99cda5f4e11cd0748c430a0aaf59b6c159bfa89.jpg@1320w_876h.webp'
+    }
+  })
+</script>
+</html>
