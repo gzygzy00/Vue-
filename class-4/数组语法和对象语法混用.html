@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.7/dist/vue.js"></script>
+  <style>
+    #app .active {
+      background-color: aqua;
+    }
+
+    .errorColor {
+      background-color: coral;
+    }
+  </style>
+
+</head>
+<body>
+数组和对象混用，第一个成员是对象，第二个成员是数组： <br>
+<div id="app">
+  <div :class="[{ 'active': isActive }, errorActive]">测试</div>
+</div>
+</body>
+
+<script>
+  var app = new Vue({
+    el: '#app',
+    data: {
+      isActive: true,
+      errorActive: 'errorColor'
+    }
+  })
+</script>
+</html>
