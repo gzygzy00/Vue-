@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>条件渲染</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.7/dist/vue.js"></script>
+  <style></style>
+</head>
+<body>
+<div id="app">
+  v-if后接的必须是等号，等号后的内容必须是布尔值 <br>
+  v-if的基本用法：<br>
+  <p v-if="false">{{ conditionA }}</p>
+  <p v-else-if="false">{{ conditionB }}</p>
+  <p v-else="2>1">{{ conditionC }}</p>
+  <hr>
+  v-if的实例用法：对不想让其服用的标签or元素，加入key即可 <br>
+  需求：点击按钮，实现用户名输入框和密码输入框的切换 <br>
+  <div v-if="type === 'name'">
+    用户名：<input type="text" placeholder="请输入用户名" key="name">
+  </div>
+  <div v-else>
+    密码：<input type="text" placeholder="请输入密码" key="password">
+  </div>
+  <button @click="toggleType">点击切换</button>
+  <hr>
+  v-show: 显现与否取决于布尔值 <br>
+  <p v-show="10>num">渲染成功</p>
+  <hr>
+  v-if和v-show的比较：渲染区别
+</div>
+</body>
+<script>
+  var app = new Vue({
+    el: '#app',
+    data: {
+      conditionA: 'A',
+      conditionB: 'B',
+      conditionC: 'C',
+      type: 'name',
+      num: 1
+    },
+    methods: {
+      toggleType() {
+        this.type = this.type === 'name' ? 'password' : 'name'
+      }
+    }
+  })
+</script>
+</html>
