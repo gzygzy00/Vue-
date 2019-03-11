@@ -15,6 +15,9 @@
   <button @click="arrReverse">翻转</button>
   <button @click="arrChangeOne">改变数组指定项</button>
   <button @click="arrReverse">改变数组长度</button>
+  <hr>
+  返回字符串中含有pp的项：<br>
+  <p>{{ matchpp }}</p>
 </div>
 </body>
 <script>
@@ -25,22 +28,32 @@
     },
     methods: {
       // 从小到大排列
-      arrSort: function(){
-        this.arr.sort(function(a,b){
+      arrSort: function () {
+        this.arr.sort(function (a, b) {
           return a.length - b.length
         })
       },
       // 倒序
-      arrReverse: function(){
+      arrReverse: function () {
         this.arr.reverse()
       },
       // 改变数组指定项  注意：vue检测不到
-      arrChangeOne: function(){
+      arrChangeOne: function () {
         this.arr[0] = 'pineapple'
       },
       // 改变数组长度  注意：vue检测不到
-      arrChangeLength: function(){
+      arrChangeLength: function () {
         this.arr.length = 1
+      }
+    },
+    computed: {
+      matchpp: function () {
+        // 参数代表要过滤的每一项
+        // return this.arr.filter(function(item){
+        //   // console.log(item)
+        //   return item.match(/pp/)
+        // })
+        return this.arr.filter(item => item.match(/pp/))
       }
     }
   })
