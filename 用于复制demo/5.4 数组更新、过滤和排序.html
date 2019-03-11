@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>数组更新</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.7/dist/vue.js"></script>
+  <style></style>
+</head>
+<body>
+<div id="app">
+  <div v-for="fruits in arr">
+    {{ fruits }}
+  </div>
+  <button @click="arrSort">排序</button>
+  <button @click="arrReverse">翻转</button>
+  <button @click="arrChangeOne">改变数组指定项</button>
+  <button @click="arrReverse">改变数组长度</button>
+</div>
+</body>
+<script>
+  var app = new Vue({
+    el: '#app',
+    data: {
+      arr: ['apple', 'pear', 'peach', 'banana']
+    },
+    methods: {
+      // 从小到大排列
+      arrSort: function(){
+        this.arr.sort(function(a,b){
+          return a.length - b.length
+        })
+      },
+      // 倒序
+      arrReverse: function(){
+        this.arr.reverse()
+      },
+      // 改变数组指定项  注意：vue检测不到
+      arrChangeOne: function(){
+        this.arr[0] = 'pineapple'
+      },
+      // 改变数组长度  注意：vue检测不到
+      arrChangeLength: function(){
+        this.arr.length = 1
+      }
+    }
+  })
+  // 改变数组指定项，通过vue
+  // Vue.set(app.arr, 1, 'car')
+
+  // 改变数组长度
+  // app.arr.splice(0)
+
+  // push()
+  // pop()
+  // shift()
+  // unshift()
+  // splice()
+  // sort()
+  // reverse()
+</script>
+</html>
