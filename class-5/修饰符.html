@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.7/dist/vue.js"></script>
+  <style></style>
+</head>
+<body>
+<div id="app">
+  stop的用法：阻止向上冒泡 <br>
+  <div style="background-color: aqua; height: 100px; width: 100px;" @click="divClick">
+    <button @click.stop="buttonClick">click</button>
+  </div>
+  <hr>
+  prevent的用法：提交事件并且不重载页面 <br>
+  <form action="" @submit.prevent="handle">
+    <input type="submit" value="发送请求">
+  </form>
+  <hr>
+  self的用法：只是作用在元素本身而非子元素的时候调用 <br>
+  <div style="background-color: antiquewhite; height: 100px; width: 100px;" @click.self="divClick">
+    <button @click="buttonClick">click</button>
+  </div>
+  <hr>
+  once的用法：只执行一次 <br>
+  <button @click="onceClick">重复点击</button>
+  <button @click.once="onceClick">一次性点击</button>
+  <hr>
+  监听键盘事件：<br>
+  <input type="text" @keyup.13="keyboard">
+  <input type="text" @keyup.enter="keyboard">
+</div>
+</body>
+<script>
+  var app = new Vue({
+    el: '#app',
+    data: {
+
+    },
+    methods: {
+      divClick(){
+        alert('点击div')
+      },
+      buttonClick(){
+        alert('点击button')
+      },
+      handle(){
+        alert('我不加载页面也不刷新')
+      },
+      onceClick(){
+        alert('执行')
+      },
+      keyboard(){
+        alert('松开了enter')
+      }
+    }
+  })
+</script>
+</html>
