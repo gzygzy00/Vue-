@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>方法与事件</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.7/dist/vue.js"></script>
+  <style></style>
+</head>
+<body>
+<div id="app">
+  {{ count }} <br>
+  <button @click="adder()">点击+1</button>
+  <button @click="adder(8)">点击+8</button>
+</div>
+</body>
+<script>
+  var app = new Vue({
+    el: '#app',
+    data: {
+      count: 0
+    },
+    methods: {
+      adder: function(count){
+        count = count || 1;
+        this.count += count
+      }
+    }
+  })
+</script>
+</html>
