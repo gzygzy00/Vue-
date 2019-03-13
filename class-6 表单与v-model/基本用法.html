@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>基本用法</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.7/dist/vue.js"></script>
+  <style></style>
+</head>
+<body>
+<div id="app">
+  v-model的用法：<br>
+  <hr>
+  input 和 textarea 的用法：<br>
+  <input type="text" v-model="inputMsg"> <br>
+  <span>{{ inputMsg }}</span> <br>
+  <textarea name="" id="" cols="30" rows="5" v-model="textareaMsg"></textarea> <br>
+  <span>{{ textareaMsg }}</span> <br>
+  <hr>
+  单选框：<br>
+  一个：<br>
+  <input type="radio" v-bind:checked="oneRadio">单选 <br>
+  <input type="radio" v-model="oneRadio">单选 ---- v-model无效 <br>
+  多个：<br>
+  选项A: <input type="radio" name="checks" value="A" v-model="checkName"> <br>
+  选项B: <input type="radio" name="checks" value="B" v-model="checkName"> <br>
+  选项C: <input type="radio" name="checks" value="C" v-model="checkName"> <br>
+  现在选中的是：「{{ checkName }}」
+  <hr>
+  复选框：<br>
+  一个：<br>
+  <input type="checkbox" v-bind:checked="oneRadio">复选 --- v-bind <br>
+  <input type="checkbox" v-model="oneRadio">复选 --- v-model <br>
+  多个：<br>
+  选项A：<input type="checkbox" value="A" v-model="boxName"> <br>
+  选项B：<input type="checkbox" value="B" v-model="boxName"> <br>
+  选项C：<input type="checkbox" value="C" v-model="boxName"> <br>
+  现在选中的是：{{ boxName }}
+</div>
+</body>
+<script>
+  var app = new Vue({
+    el: '#app',
+    data: {
+      inputMsg: '',
+      textareaMsg: '',
+      oneRadio: true,
+      checkName: '',
+      boxName: []
+    }
+  })
+</script>
+</html>
