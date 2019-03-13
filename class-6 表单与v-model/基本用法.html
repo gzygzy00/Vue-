@@ -35,6 +35,22 @@
   选项B：<input type="checkbox" value="B" v-model="boxName"> <br>
   选项C：<input type="checkbox" value="C" v-model="boxName"> <br>
   现在选中的是：{{ boxName }}
+  <hr>
+  下拉框：<br>
+  单选：<br>
+  <select v-model="selectOne">
+    <option value="选项A">选项A</option>
+    <option value="选项B">选项B</option>
+    <option value="选项C">选项C</option>
+  </select> <br>
+  现在选择的是：{{ selectOne }}<br>
+  多选：<br>
+  <select v-model="selectMul" multiple>
+    <option value="选项A">选项A</option>
+    <option value="选项B">选项B</option>
+    <option value="选项C">选项C</option>
+  </select> <br>
+  现在选择的是：{{ selectMul }}<br>
 </div>
 </body>
 <script>
@@ -45,7 +61,9 @@
       textareaMsg: '',
       oneRadio: true,
       checkName: '',
-      boxName: []
+      boxName: [],
+      selectOne: '',
+      selectMul: []
     }
   })
 </script>

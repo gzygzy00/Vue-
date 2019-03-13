@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.7/dist/vue.js"></script>
+  <style></style>
+</head>
+<body>
+<div id="app">
+  绑定值：<br>
+  单选按钮：<br>
+  <input type="radio" :value="radioVal" v-model="picked"> <br>
+  其中 :value="radioVal" v-model="picked" <br>
+  现在：radioVal为 {{ radioVal }}，picked为{{ picked }}
+  <hr>
+  复选框：—— 选中和不选中的value不一样 <br>
+  <input type="checkbox" v-model="toggle" :true-value="value1" :false-value="value2"> <br>
+  toggle: {{toggle}} <br>
+  现在的{{value1}}value1：{{ toggle === value1 }} <br>
+  现在的{{value2}}value2：{{ toggle === value2 }}
+  <hr>
+  下拉框：<br>
+  <select v-model="selectMod">
+    <option :value="{num: 123}">选项A</option>
+    <option value="选项B">选项B</option>
+    <option value="选项C">选项C</option>
+  </select> <br>
+  此时选中的是：{{ selectMod }} {{typeof selectMod}}
+  <hr>
+  修饰符：<br>
+  lazy: <br>
+  <input type="text" v-model="inputMod">----{{inputMod}} <br>
+  <input type="text" v-model.lazy="inputLazy">----{{inputLazy}} <br>
+  <hr>
+  number: <br>
+  <input type="text" v-model.number="isNum"> <br>
+  输入的值是：{{ typeof isNum }} <br>
+  <hr>
+  trim: <br>
+  <input type="text" v-model.trim="trimStr"> <br>
+  ABC{{ trimStr }}DEF
+  <br> {{ trimStr.length }}
+</div>
+</body>
+<script>
+  var app = new Vue({
+    el: '#app',
+    data: {
+      radioVal: 'app',
+      picked: true,
+      toggle: true,
+      value1: '选中',
+      value2: '未选中',
+      selectMod: '',
+      inputMod: '',
+      inputLazy: '',
+      isNum: '',
+      trimStr: ''
+    }
+  })
+</script>
+</html>
