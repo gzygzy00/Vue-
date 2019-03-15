@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.7/dist/vue.js"></script>
+  <style>
+    #app {
+      border: 1px solid saddlebrown;
+      margin: 0 auto;
+      text-align: center;
+      height: 400px;
+      width: 600px;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <my-component msg="父组件传递的数据"></my-component>
+  <input type="text" v-model="width">
+  <change-width :width="width"></change-width>
+</div>
+</body>
+<script>
+  Vue.component('my-component', {
+    props: ['msg'],
+    template: '<div>{{count}}</div>',
+    data: function () {
+      return {
+        count: this.msg
+      }
+    }
+  });
+
+  Vue.component('change-width', {
+    props: ['width'],
+    template: '<div :style="style"></div>',
+    data: function(){
+      return{}
+    },
+    computed: {
+      style: function(){
+        return {
+          width: this.width + 'px',
+          background: 'red',
+          height: '30px'
+        }
+      }
+    }
+  })
+
+  var app = new Vue({
+    el: '#app',
+    data: {
+      width: 0
+    }
+  });
+
+
+</script>
+</html>
