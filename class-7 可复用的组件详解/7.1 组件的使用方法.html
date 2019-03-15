@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>组件的使用方法</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.7/dist/vue.js"></script>
+  <style></style>
+</head>
+<body>
+<div id="app" style="border: 1px solid bisque">
+  <my-component></my-component>
+  <app-component></app-component>
+  <table>
+    <!--<my-component></my-component>-->
+    <tbody is="my-component"></tbody>
+  </table>
+  <app-button></app-button>
+  <app-button></app-button>
+</div>
+<br>
+<div id="app2" style="border: 1px solid salmon">
+  <my-component></my-component>
+  <!--<app-component></app-component>-->
+</div>
+table中只能有td,tr,tbody这些元素
+
+
+</body>
+<script>
+  // 注册组件
+  Vue.component('my-component', {
+    template: '<div>我是一个组件</div>'
+  })
+
+  var app = new Vue({
+    el: '#app',
+    components: {
+      'app-component': {
+        template: '<div>我是app组件</div>'
+      },
+      'app-button': {
+        template: '<button @click="count++">{{count}}</button>',
+        data: function(){
+          return {
+            count: 0
+          }
+        }
+      }
+    },
+    data: {}
+  })
+
+  var app2 = new Vue({
+    el: '#app2',
+    data: {}
+  })
+</script>
+</html>
