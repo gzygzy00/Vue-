@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.7/dist/vue.js"></script>
+  <style>
+    #app {
+      border: 1px solid saddlebrown;
+      margin: 0 auto;
+      text-align: center;
+      height: 400px;
+      width: 600px;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <my-component>
+    <p>新内容</p>
+  </my-component>
+  <hr>
+  具名插槽: <br>
+  <name-component>
+    <h3 slot="header">标题</h3>
+    <p>正文第一段</p>
+    <p>正文第二段</p>
+    <footer slot="footer">底部信息</footer>
+  </name-component>
+
+</div>
+</body>
+<script>
+  Vue.component('my-component', {
+    template: `<div>
+      <slot>
+        默认内容
+      </slot>
+    </div>`
+  });
+
+  Vue.component('name-component', {
+    template: `  <div>
+  <div class="header">
+    <slot name="header"></slot>
+  </div>
+  <div class="container">
+    <slot></slot>
+  </div>
+  <div class="footer">
+    <slot name="footer"></slot>
+  </div>
+</div>`,
+    mounted: function () {
+      // 访问插槽
+      var header = this.$slots.header;
+      var text = header[0].elm.innerText;
+      var html = header[0].elm.innerHTML
+      console.log(this.$slots);
+      console.log(header);
+      console.log(text);
+      console.log(html);
+
+    }
+  });
+
+  var app = new Vue({
+    el: '#app',
+    data: {}
+  })
+</script>
+</html>
