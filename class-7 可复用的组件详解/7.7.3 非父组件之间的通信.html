@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.7/dist/vue.js"></script>
+  <style>
+    #app {
+      border: 1px solid saddlebrown;
+      margin: 0 auto;
+      text-align: center;
+      height: 400px;
+      width: 600px;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <br>
+  <a-component ref="a"></a-component>
+  <br>
+  <b-component ref="b"></b-component>
+  <br>
+  {{msg}} <br>
+  <c-component ref="c"></c-component>
+  <br>
+  <button @click="getChildData">点击获取子组件数据</button>
+  <br> {{formChild}}
+</div>
+</body>
+<script>
+  Vue.component('a-component', {
+    template: '<div><button @click="eventA">点击向B传递数据</button></div>',
+    data: function () {
+      return {
+        a: '我是来自A组件的内容',
+        msg: '我是来自A组件的内容'
+      }
+    },
+    methods: {
+      eventA: function () {
+        this.$root.bus.$emit('eventA', this.a)
+      }
+    }
+  });
+
+  Vue.component('b-component', {
+    template: '<div></div>',
+    data: function () {
+      return {msg: '我是来自B组件的内容'}
+    },
+    //实例创建的时候就监听事件
+    created: function () {
+      this.$root.bus.$on('eventA', function (value) {
+        alert(value)
+      })
+    }
+  });
+
+  Vue.component('c-component', {
+    template: '<button @click="setParentsData">点击修改父组件数据</button>',
+    data: function () {
+      return {msg: '我是来自C组件的内容'}
+    },
+    methods: {
+      setParentsData: function () {
+        this.$parent.msg = '已修改数据'
+      }
+    }
+  });
+
+  var app = new Vue({
+    el: '#app',
+    data: {
+      //中介bus
+      bus: new Vue(),
+      msg: '未修改数据',
+      formChild: '还未拿到'
+    },
+    methods: {
+      getChildData: function(){
+        this.formChild = this.$refs.c.msg
+      }
+    }
+  })
+</script>
+</html>
