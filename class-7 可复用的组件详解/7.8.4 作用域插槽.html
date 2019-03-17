@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.7/dist/vue.js"></script>
+  <style>
+    #app {
+      border: 1px solid saddlebrown;
+      margin: 0 auto;
+      text-align: center;
+      height: 400px;
+      width: 600px;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <my-component>
+    <!--<template slot="slotname" slot-scope="prop">-->
+      <!--text: {{prop.text}} <br>-->
+      <!--name: {{prop.name}} <br>-->
+      <!--abc: {{prop.abc}} <br>-->
+    <!--</template>-->
+    <p slot="slotname" slot-scope="prop">
+      text: {{prop.text}} <br>
+      name: {{prop.name}} <br>
+      abc: {{prop.abc}} <br>
+    </p>
+  </my-component>
+</div>
+</body>
+<script>
+  Vue.component('my-component', {
+    template: `<div>
+        <slot text="我是来自子组件中的内容" abc="abc" name="slotname"></slot>
+      </div>`
+  });
+
+  var app = new Vue({
+    el: '#app',
+    data: {}
+  })
+</script>
+</html>
