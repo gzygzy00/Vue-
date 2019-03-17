@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.7/dist/vue.js"></script>
+  <style>
+    #app {
+      border: 1px solid saddlebrown;
+      margin: 0 auto;
+      text-align: center;
+      height: 400px;
+      width: 600px;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <component :is="thisView"></component>
+  <button @click="handleView('A')">第一句</button>
+  <button @click="handleView('B')">第二句</button>
+  <button @click="handleView('C')">第三句</button>
+  <button @click="handleView('D')">第四句</button>
+</div>
+</body>
+<script>
+  var app = new Vue({
+    el: '#app',
+    data: {
+      thisView: ''
+    },
+    components: {
+      'compA': {
+        template: `<div>床前明月光</div>`
+      },
+      'compB': {
+        template: `<div>疑是地上霜</div>`
+      },
+      'compC': {
+        template: `<div>举头望明月</div>`
+      },
+      'compD': {
+        template: `<div>低头思故乡</div>`
+      }
+    },
+    methods: {
+      handleView: function (tag) {
+        this.thisView = 'comp' + tag;
+        console.log(tag);
+      }
+    }
+  })
+</script>
+</html>
