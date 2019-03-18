@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.7/dist/vue.js"></script>
+  <style>
+    #app {
+      border: 1px solid saddlebrown;
+      margin: 0 auto;
+      text-align: center;
+      height: 400px;
+      width: 600px;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <comp :level="level">不是，你为什么要说不是</comp>
+  <!--<template id="hdom">-->
+    <!--<div>-->
+      <!--<h1 v-if="level===1">-->
+        <!--<slot></slot>-->
+      <!--</h1>-->
+      <!--<h2 v-if="level===2">-->
+        <!--<slot></slot>-->
+      <!--</h2>-->
+      <!--<h3 v-if="level===3">-->
+        <!--<slot></slot>-->
+      <!--</h3>-->
+    </div>
+  </template>
+</div>
+</body>
+<script>
+  // Vue.component('comp', {
+  //   props: ['level'],
+  //   template: '#hdom'
+  // })
+
+  Vue.component('comp', {
+    props: ['level'],
+    render: function(createElement){
+      return createElement('h'+this.level, this.$slots.default)
+    }
+  })
+
+  var app = new Vue({
+    el: '#app',
+    data: {
+      level: 2
+    }
+  })
+
+
+</script>
+</html>
