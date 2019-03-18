@@ -20,16 +20,43 @@
 </head>
 <body>
 <div id="app">
-  选项1<input type="radio" :value="val" v-model="msg"> <br>
-  {{msg}}
+  <a-comp></a-comp>
+  <b-comp></b-comp>
 </div>
 </body>
 <script>
+  // 非父子组件之间传值的demo
   var app = new Vue({
     el: '#app',
     data: {
-      val: 'xx1',
-      msg: true
+      bus: new Vue()
+    },
+    methods: {},
+    components: {
+      'a-comp': {
+        template: `<div>
+      <button @click="pass">点击向B组件传递数据</button>
+    </div>`,
+        data: function () {
+          return {
+            msg: '数据'
+          }
+        },
+        methods: {
+          pass: function () {
+            this.$root.bus.$emit('passToB', this.msg)
+          }
+        }
+      },
+      'b-comp': {
+        template: `<div></div>`,
+        created: function () {
+          this.$root.bus.$on('passToB', function (val) {
+            alert(val)
+          })
+        }
+
+      }
     }
   })
 </script>
