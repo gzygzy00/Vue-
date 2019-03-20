@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.7/dist/vue.js"></script>
+  <style>
+    #app {
+      border: 1px solid saddlebrown;
+      margin: 0 auto;
+      text-align: center;
+      height: 400px;
+      width: 600px;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <comp value="good"></comp>
+</div>
+</body>
+<script>
+  Vue.component('comp', {
+    functional: true, //表示当前的vue实例无状态。无实例
+    render: function (createElement, context) {
+      return createElement('button', {
+        on: {
+          click: function () {
+            // this.text----context.props.text
+            // this.$slots.default-----context.children
+            console.log(context)
+            console.log(context.parent)
+            alert(context.parent.msg)
+            alert(context.props.value)
+          }
+        }
+      }, '点击我学习context')
+    },
+    props: ['value']
+  })
+
+  var app = new Vue({
+    el: '#app',
+    data: {
+      msg: '父组件内容'
+    }
+  })
+
+
+</script>
+</html>
