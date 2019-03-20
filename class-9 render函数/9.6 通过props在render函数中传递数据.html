@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.7/dist/vue.js"></script>
+  <style>
+    #app {
+      border: 1px solid saddlebrown;
+      margin: 0 auto;
+      text-align: center;
+      height: 400px;
+      width: 600px;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <button @click="switchShow">点击切换</button>
+  <comp :show="show"></comp>
+  show---{{show}}
+</div>
+</body>
+<script>
+  // 需求：点击按钮 切换图片
+  Vue.component('comp', {
+    props: ['show'],
+    render: function (createElement) {
+      var imgsrc;
+      if (this.show) {
+        imgsrc = 'img/002.jpeg'
+      } else {
+        imgsrc = 'img/001.jpeg'
+      }
+      return createElement('img', {
+        attrs: {
+          src: imgsrc
+        },
+        style: {
+          width: '400px',
+          height: '200px'
+        }
+      })
+    }
+  })
+
+  var app = new Vue({
+    el: '#app',
+    data: {
+      show: true
+    },
+    methods: {
+      switchShow: function () {
+        this.show = !this.show
+      }
+    }
+  })
+
+
+</script>
+</html>

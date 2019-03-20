@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.7/dist/vue.js"></script>
+  <style>
+    #app {
+      border: 1px solid saddlebrown;
+      margin: 0 auto;
+      text-align: center;
+      height: 400px;
+      width: 600px;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <comp>
+    <p>我是第一句</p>
+    <p>我是第二句</p>
+    <h1 slot="header">我是标题</h1>
+    <h3 slot="footer">我是结尾</h3>
+  </comp>
+</div>
+</body>
+<script>
+  // 第三个参数存的就是VNODE
+  Vue.component('comp', {
+    render: function (createElement) {
+      var header = this.$slots.header  // 这里返回的参数就是含有=VNODE的数组
+      var footer = this.$slots.footer
+      var main = this.$slots.default
+      return createElement('div', [
+        createElement('header', header),
+        createElement('footer', footer),
+        createElement('main', main)
+      ])
+    }
+  })
+
+  var app = new Vue({
+    el: '#app',
+    data: {}
+  })
+
+
+</script>
+</html>
