@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.7/dist/vue.js"></script>
+  <style>
+    #app {
+      border: 1px solid saddlebrown;
+      margin: 0 auto;
+      text-align: center;
+      height: 400px;
+      width: 600px;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <!--<comp :name="name" @input="showName"></comp>-->
+  <comp v-model="name"></comp>
+  <br> {{name}}
+</div>
+</body>
+<script>
+  Vue.component('comp', {
+    props: ['name'],
+    render: function(createElement){
+      var self = this // 此处this是Vue实例
+      return createElement('input', {
+        domProps: {
+          value: self.name
+        },
+        on: {
+          input: function (event) {
+            // 此处的this是window
+            self.$emit('input', event.target.value)
+            // https://developer.mozilla.org/zh-CN/docs/Web/API/Event/target
+          }
+        }
+      })
+    }
+  })
+
+  var app = new Vue({
+    el: '#app',
+    data: {
+      name: 'JACK'
+    },
+    // methods: {
+    //   showName: function (value) {
+    //     this.name = value
+    //   }
+    // }
+  })
+
+
+</script>
+</html>
