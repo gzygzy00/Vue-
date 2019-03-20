@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.7/dist/vue.js"></script>
+  <style>
+    #app {
+      border: 1px solid saddlebrown;
+      margin: 0 auto;
+      text-align: center;
+      height: 400px;
+      width: 600px;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <comp>
+    <template slot-scope="prop">
+      {{prop.text}} <br>
+      {{prop.msg}}
+    </template>
+  </comp>
+</div>
+</body>
+<script>
+  Vue.component('comp', {
+    render: function (createElement) {
+      // 相当于<div> <slot :text="text"></slot> </div>
+      return createElement('div', this.$scopedSlots.default({
+        text: '在下作用域插槽的text',
+        msg: '在下...msg'
+      }))
+    }
+  })
+
+  var app = new Vue({
+    el: '#app',
+    data: {}
+  })
+
+
+</script>
+</html>
