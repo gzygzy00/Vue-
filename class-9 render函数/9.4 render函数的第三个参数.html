@@ -15,11 +15,18 @@
   </style>
 </head>
 <body>
-<div id="app"></div>
+<div id="app">
+  <comp></comp>
+</div>
 </body>
 <script>
-  Vue.component('my-component', {
-    template: '<div>我的组件</div>'
+  Vue.component('comp', {
+    render: function (createElement) {
+      return createElement('div', [
+        createElement('h1', '我是h1'),
+        createElement('h2', '我是h2')
+      ])
+    }
   })
 
   var app = new Vue({
